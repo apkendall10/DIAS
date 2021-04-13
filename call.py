@@ -1,5 +1,9 @@
-import requests, sys
+"""
+Toy script to ping the worker end-point
+Parses command line text and uses it as an arugment in the request
+"""
 
+import requests, sys
 
 if len(sys.argv) > 1:
     text = sys.argv[1]

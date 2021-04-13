@@ -15,7 +15,7 @@ url = f"http://localhost:56733/"
 params = {'text': text, 
           'tag': 'fakenews',
           'cat': 'NLP',
-          'model_num': '1'}
+          'model_num': '2'}
 
 r = requests.get(url, params = params)
 print(r.url)

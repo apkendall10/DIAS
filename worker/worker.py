@@ -19,15 +19,15 @@ app.config["DEBUG"] = True
 @app.route('/', methods=['GET'])
 def home():
     try:
-        text = request.args['text']
-        cat = request.args['cat']
-        tag = request.args['tag']
-        model_num = request.args['model_num']
+        text = request.args['Input']
+        cat = request.args['Category']
+        tag = request.args['Tag']
+        model_num = request.args['Model']
     except Exception as e:
         msg = f"Error: incorrect params passed. Expected (text, cat, tag, model_num), recieved ({', '.join(list(request.args.keys()))})"
         logger.error(e)
         logger.error(msg)
-        return msg
+        return msg, 400
 
     # Travel through our tree of dictionaries to get to the correct subtree
     # Generate any missing pieces
@@ -47,14 +47,14 @@ def home():
             msg = f"Error: unable to identify a model with cat = {cat}, tag = {tag}, model_num = {model_num}"
             logger.error(e)
             logger.error(msg)
-            return msg
+            return msg, 400
 
         sub_tree[model_num] = (model, pipeline)
     
     data = pipeline([text])
     #predict_proba returns a single element list of tuples with (prob_true, prob_false)
     #we just display the prob_false - i.e. we answer is this fake?
-    return str(model.predict_proba(data)[0][1])
+    return str(model.predict(data)[0]), 200
 
 
 def get_details(cat, tag, model_num):

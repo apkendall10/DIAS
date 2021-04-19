@@ -10,7 +10,7 @@ logger = logging.getLogger()
 
 # System map to determine model addresses
 model_lookup_map = {
-	"NLP": {"fakenews": {"url": "http://worker/", "models": [1,2], "Info": "Input: Text, Output: Real or Fake News"}},
+	"NLP": {"fakenews": {"url": "http://worker/", "models": [1,2,3,4,5], "Info": "Input: Text, Output: Real or Fake News"}},
 	"IMAGE": {"catORdog": {"url": "http://worker/", "models": [1,2,3], "Info": "Input: Image, Output: Image of Cat or Dog"}},
 }
 

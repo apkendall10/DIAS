@@ -51,10 +51,17 @@ def home():
 
         sub_tree[model_num] = (model, pipeline)
     
-    data = pipeline([text])
+    try:
+        data = pipeline([text])
+        prediction = model.predict(data)[0]
+    except Exception as e:
+        msg = f"Error: unable to perform data tranformation and prediction for cat = {cat}, tag = {tag}, model_num = {model_num}"
+        logger.error(e)
+        logger.error(msg)
+        return msg, 400
     #predict_proba returns a single element list of tuples with (prob_true, prob_false)
     #we just display the prob_false - i.e. we answer is this fake?
-    return str(model.predict(data)[0]), 200
+    return str(prediction), 200
 
 
 def get_details(cat, tag, model_num):

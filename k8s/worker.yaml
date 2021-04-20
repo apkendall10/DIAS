@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: worker
-        image: worker:latest # container register
+        image: gcr.io/stately-vector-311213/worker:latest
         ports:
         - containerPort: 80
 ---
@@ -28,6 +28,7 @@ spec:
   type: NodePort
   ports:
   - port: 80
+    targetPort: 80
     nodePort: 30081
   selector:
     app: dias-worker

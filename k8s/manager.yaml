@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: manager
-        image: dias-manager:latest # container register
+        image: manager:latest # container register
         ports:
         - containerPort: 80
 ---

@@ -1,3 +1,18 @@
+TODO:
+The worker service `dias-worker-svc` is reachable from manager service `dias-manager-svc`, but /predict fails with
+a connection establishment error. This is likely due to an error I see in worker uWSGI logs:\\
+`# kubectl logs svc/dias-worker-svc`\\
+```
+spawned uWSGI worker 1 (pid: 17, cores: 1)
+spawned uWSGI worker 2 (pid: 18, cores: 1)
+ModuleNotFoundError: No module named 'manager'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+```
+
+Manager service is reachable from external host (GET works).
+
+
 # DIAS
 Distributed inference as a service: a course project for CS 739 at UW-Madison
 

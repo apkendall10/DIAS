@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dias-manager
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dias-manager
+  template:
+    metadata:
+      labels:
+        app: dias-manager
+    spec:
+      containers:
+      - name: manager
+        image: gcr.io/stately-vector-311213/manager:latest
+        ports:
+        - containerPort: 80
+# Node port type
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: dias-manager-svc
+#   labels:
+#     app: dias-manager
+# spec:
+#   type: NodePort
+#   ports:
+#   - port: 80
+#     nodePort: 30080
+#   selector:
+#     app: dias-manager
+# Load balancer for ext_ip
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dias-manager-svc
+spec:
+  selector:
+    app: dias-manager
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+#  clusterIP: 10.0.171.239
+  type: LoadBalancer

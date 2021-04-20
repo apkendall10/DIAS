@@ -1,8 +1,10 @@
 FROM tiangolo/uwsgi-nginx:python3.7
 ENV STATIC_URL /static
 ENV STATIC_PATH /var/www/app/static
+#WORKDIR /var/www/app
+#COPY . /var/www/app/
 COPY ./requirements.txt /var/www/requirements.txt
 RUN pip install -r /var/www/requirements.txt
-COPY worker.py /var/www/app/worker.py
-COPY config.py /var/www/app/config.py
-COPY uwsgi.ini /var/www/app/wsgi.ini
+# we might not need run.sh -- let's see
+#RUN chmod 755 /var/www/app/start.sh 
+#CMD ["/var/www/app/start.sh"]

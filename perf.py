@@ -6,7 +6,7 @@ parser = ArgumentParser()
 parser.add_argument('-n', dest='node', type=int,
                     help='Process number to track output.', default=0)
 
-url = f"http://35.184.97.122/predict"
+url = f"http://35.202.228.150/predict"
 
 def make_request(text):
     params = {'Input': text, 
@@ -24,10 +24,9 @@ def main(node):
         make_request(row.text)
         latencies.append(round(time.time() - tic,4))
     total = round(time.time() - start,4)
-    pd.Series(latencies).to_csv(f'{node}_latenices.csv')
-    pd.Series([total]).to_csv(f'{node}_total.csv')
+    pd.Series(latencies).to_csv(f'latenices_{node}.csv')
+    pd.Series([total]).to_csv(f'total_{node}.csv')
 
 if __name__ == '__main__':
-    
     args = parser.parse_args()
     main(args.node)

@@ -10,7 +10,7 @@ if len(sys.argv) > 1:
 else:
     text = "test"
 
-url = f"http://localhost:8002/predict"
+url = f"http://35.202.228.150/predict"
 # non-docker test url = 'http://127.0.0.1:5000/'
 params = {'Input': text, 
           'Category': 'NLP',

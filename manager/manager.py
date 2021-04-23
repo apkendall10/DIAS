@@ -11,8 +11,8 @@ logger = logging.getLogger()
 # System map to determine model addresses
 # TODO: verify!
 model_lookup_map = {
-	"NLP": {"fakenews": {"url": "http://worker/", "models": [1,2,3,4,5], "Info": "Input: Text, Output: Real or Fake News"}},
-	"IMAGE": {"catORdog": {"url": "http://worker/", "models": [1,2,3], "Info": "Input: Image, Output: Image of Cat or Dog"}},
+	"NLP": {"fakenews": {"url": "http://dias-worker-svc/", "models": [1,2,3,4,5], "Info": "Input: Text, Output: Real or Fake News"}},
+	"IMAGE": {"catORdog": {"url": "http://dias=worker-svc/", "models": [1,2,3], "Info": "Input: Image, Output: Image of Cat or Dog"}},
 }
 
 @app.route('/', methods=['GET'])

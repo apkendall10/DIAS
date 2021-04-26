@@ -1,4 +1,5 @@
 export PROJECT_ID=stately-vector-311213
+gcloud config set project stately-vector-311213
 cd manager & docker build -t gcr.io/${PROJECT_ID}/manager:latest .
 cd ../worker & docker ^Cild -t gcr.io/${PROJECT_ID}/worker:latest .
 cd ..
@@ -50,3 +51,16 @@ gcloud container images delete gcr.io/${PROJECT_ID}/worker:latest  --force-delet
 
 
 # https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+
+
+##############################################
+Testing google functions
+
+# Manager
+gcloud functions call func-manager --data '{"Input": "test", "Category": "NLP", "Task": "fakenews"}'
+# Worker
+# gcloud functions call function-test --data '{"Input": "test", "Category": "NLP", "Tag": "fakenews", "Model": 1}'
+# Passed as params not json.
+
+

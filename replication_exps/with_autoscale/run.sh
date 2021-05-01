@@ -13,8 +13,8 @@ gcloud container clusters get-credentials dias-cluster --zone us-central1-c --pr
 # sleep 30s
 
 # autoscale number of replicas
-kubectl autoscale deployment dias-worker --cpu-percent=70 --min=1 --max=35
-kubectl autoscale deployment dias-manager --cpu-percent=70 --min=1 --max=35
+kubectl autoscale deployment dias-worker --cpu-percent=70 --min=1 --max=60
+kubectl autoscale deployment dias-manager --cpu-percent=70 --min=1 --max=60
 sleep 30s
 
 for total_clients in "${num_clients[@]}"; do
@@ -59,9 +59,7 @@ for total_clients in "${num_clients[@]}"; do
 	wait
 	echo "Clients: ${total_clients} processed!"
 
-	# reset the total number of pods
-	kubectl scale --replicas=3 deployment/dias-worker
-	kubectl scale --replicas=3 deployment/dias-manager
+	kubectl autoscale deployment dias-worker --cpu-percent=70 --min=1 --max=60
+	kubectl autoscale deployment dias-manager --cpu-percent=70 --min=1 --max=60
 	sleep 30s
-
 done

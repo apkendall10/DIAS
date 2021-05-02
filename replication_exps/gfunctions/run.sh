@@ -12,16 +12,15 @@ for total_clients in "${num_clients[@]}"; do
 		continue
 	fi
 
-    mkdir -p "${total_clients}"
+    	mkdir -p "${total_clients}"
 
-    echo "Initializing total clients: ${total_clients} ..."
+    	echo "Initializing total clients: ${total_clients} ..."
 
-	# do measurement
+	#do measurement
 	for client in $(seq "$total_clients"); do
 		python3 performance_test.py -n ${client} -c ${total_clients} &
-		# echo "Client: ${client}, total clients: ${total_clients}"
+		#echo "Client: ${client}, total clients: ${total_clients}"
 	done
-
-    wait
+	wait
 	echo "Clients: ${total_clients} processed!"
 done

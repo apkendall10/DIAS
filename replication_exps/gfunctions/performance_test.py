@@ -19,12 +19,16 @@ def make_request(text):
 def main(node, num_clients):
     latencies = []
     df = pd.read_csv('../all.csv')
+    print(len(df))
     start = time.time()
 
-    for i in range(len(df)):
+    for i in range(int(len(df)/2)):
         row = df.iloc[i]
         tic = time.time()
-        make_request(row.text)
+        make_request(row.text[:int(len(row.text)/2)])
+        latencies.append(round(time.time() - tic,4))
+        tic = time.time()
+        make_request(row.text[int(len(row.text)/2):])
         latencies.append(round(time.time() - tic,4))
 
     total = round(time.time() - start,4)
@@ -34,3 +38,4 @@ def main(node, num_clients):
 if __name__ == '__main__':
     args = parser.parse_args()
     main(args.node, args.num_clients)
+

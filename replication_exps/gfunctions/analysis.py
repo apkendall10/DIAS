@@ -4,9 +4,10 @@ import numpy as np
 import pandas as pd
 
 data_size = 129508.092
+#data_size = 129
 #data_size = 62000
-categories = ["with_autoscale", "without_autoscale"]
-#categories = ["with_autoscale"]
+#categories = ["with_autoscale", "without_autoscale"]
+categories = ["with_autoscale"]
 num_clients = [1, 5, 10, 20, 40, 80, 160]
 
 def average(lst):
@@ -42,10 +43,10 @@ def make_memory_graph():
 			else:
 				mem_usage.append(average(node_mem))
 
-	df=pd.DataFrame({'# of clients': num_clients , 'Auto-Scale': mem_usage_auto_scale, 'Static': mem_usage})
+	df=pd.DataFrame({'# of clients': num_clients , 'Auto-Scale-max-70': mem_usage_auto_scale, 'Static': mem_usage})
  
 	# multiple line plots
-	plt.plot( '# of clients', 'Auto-Scale', data=df, color='red', linewidth=2)
+	plt.plot( '# of clients', 'Auto-Scale-max-70', data=df, color='red', linewidth=2)
 	plt.plot( '# of clients', 'Static', data=df, color='blue', linewidth=2)
 	
 	plt.legend()
@@ -175,14 +176,14 @@ def make_throughput_graph():
 				throughput.append(average(th))
 
 	print(throughput_auto_scale)
-	df=pd.DataFrame({'# of clients': num_clients , 'Auto-Scale': throughput_auto_scale})
-	df=pd.DataFrame({'# of clients': num_clients, 'Static': throughput})
+	df=pd.DataFrame({'# of clients': num_clients , 'Auto-Scale-max-70': throughput_auto_scale})
+	#df=pd.DataFrame({'# of clients': num_clients, 'Static': throughput})
  
 	# multiple line plots
-	plt.plot( '# of clients', 'Auto-Scale', data=df, color='red', linewidth=2)
-	plt.plot( '# of clients', 'Static', data=df, color='blue', linewidth=2)
+	plt.plot( '# of clients', 'Auto-Scale-max-70', data=df, color='red', linewidth=2)
+	#plt.plot( '# of clients', 'Static', data=df, color='blue', linewidth=2)
 	
-	plt.legend()
+	#plt.legend()
 	plt.xlabel("# of clients")
 	plt.ylabel("Throughput (KB/s)")
 
